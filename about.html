@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Магазин Adidas - О Магазине</title>
+  <!-- Bootstrap CSS via CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .navbar-brand img {
+      height: 40px;
+    }
+    body {
+      background-color: #f8f9fa; /* Светло-серый цвет */
+    }
+    #map {
+      height: 400px;
+      width: 100%;
+    }
+  </style>
+  <!-- Подключение Яндекс.Карт API -->
+  <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+</head>
+<body>
+  <!-- Навигационная панель -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/2/20/Adidas_Logo.svg" alt="Логотип Adidas">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Переключить навигацию">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Главная</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="about.html">О Магазине</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="faq.html">FAQ</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="returns.html">Возвраты и обмены</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="discounts.html">Скидки</a>
+          </li>
+        </ul>
+        <span class="navbar-text ms-auto">
+          Вы вошли как: <strong>Иван Иванов</strong>
+        </span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Контент страницы "О Магазине" -->
+  <div class="container mt-4">
+    <h1 class="text-center mb-4">О Магазине Adidas</h1>
+
+    <!-- Основная информация -->
+    <div class="container">
+      <h2 class="text-center mb-4">Основные сведения</h2>
+      <div class="row align-items-center">
+        <div class="col-md-4">
+          <img src="img/shop.png" class="img-fluid rounded" alt="Магазин Adidas">
+        </div>
+        <div class="col-md-8">
+          <p>
+            Добро пожаловать в Магазин Adidas — ваше универсальное место для спортивной одежды и обуви. Мы гордимся тем, что предлагаем высококачественные продукты, сочетающие стиль и производительность.
+          </p>
+          <p>
+            Наша миссия — вдохновлять и помогать людям через инновационный дизайн и устойчивые практики. Независимо от того, бегун вы, баскетболист или просто любитель моды, у нас найдется что-то для каждого.
+          </p>
+          <a href="index.html" class="btn btn-primary">Посмотреть Каталог</a>
+        </div>
+      </div>
+    </div>
+    
+
+    <!-- Как добраться до магазина -->
+    <div class="container mt-4">
+      <h2 class=" text-center mb-4">Как добраться</h2>
+      <div class="row">
+        <div class="col-md-6">
+          <h3>Информация для посетителей</h3>
+          <p>Мы находимся в Харькове по адресу: просп. Героев Харькова, 199.</p>
+          <p>
+            Приглашаем вас посетить наш магазин, где вас ждёт широкий ассортимент товаров и приятная атмосфера для покупок. Откройте для себя лучшие предложения и получите персональное обслуживание!
+          </p>
+          <p><strong>Часы работы:</strong></p>
+          <ul>
+            <li>Понедельник–Пятница: XX:XX–XX:XX</li>
+            <li>Суббота–Воскресенье: XX:XX–XX:XX</li>
+          </ul>
+          <p><strong>Контакты:</strong> +X (XXX) XXX-XX-XX</p>
+        </div>
+        <div class="col-md-6 mb-4">
+          <div id="map"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS via CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Скрипт для Яндекс.Карт -->
+  <script>
+    ymaps.ready(function () {
+      var map = new ymaps.Map("map", {
+          center: [49.9777, 36.2478], // Координаты адреса
+          zoom: 14
+      });
+
+      // Добавление метки
+      var placemark = new ymaps.Placemark([49.9777, 36.2478], {
+          hintContent: 'Магазин Adidas',
+          balloonContent: 'просп. Героев Харькова, 199, Харьков'
+      });
+
+      map.geoObjects.add(placemark);
+
+      // Построение маршрута
+      ymaps.route([
+        [49.9777, 36.2478]
+      ]).then(function (route) {
+          map.geoObjects.add(route);
+      }, function (error) {
+          console.log("Ошибка построения маршрута: ", error);
+      });
+    });
+  </script>
+  </body>
+</html>
